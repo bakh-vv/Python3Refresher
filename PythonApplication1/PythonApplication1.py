@@ -159,5 +159,28 @@ with open("myfile.txt") as f:
     for line in f:
         print(line)
 
+# The Iterable.
+# An iterable is an object that can be treated as a sequence.
 
+filled_dict = {"one": 1, "two": 2, "three": 3}
+our_iterable = filled_dict.keys()
+print(our_iterable)  # => dict_keys(['one', 'two', 'three']). This is an object that implements our Iterable interface.
 
+# We can loop over it.
+for i in our_iterable:
+    print(i)  # Prints one, two, three
+
+# cannot address elements by index.
+our_iterable[1]  # Raises a TypeError
+
+# can create an iterator.
+our_iterator = iter(our_iterable)
+# Our iterator is an object that can remember the state as we traverse through it.
+next(our_iterator)  # => "one"
+# It maintains state as we iterate.
+next(our_iterator)  # => "two"
+next(our_iterator)  # => "three"
+next(our_iterator)  # Raises StopIteration
+
+# You can grab all the elements of an iterator by calling list() on it.
+list(filled_dict.keys())
