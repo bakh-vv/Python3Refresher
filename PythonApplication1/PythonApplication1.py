@@ -283,3 +283,28 @@ list(filter(lambda x: x > 5, [3, 4, 5, 6, 7]))  # => [6, 7]
 # set and dict comprehensions
 {x for x in 'abcddeef' if x not in 'abc'}  # => {'d', 'e', 'f'}
 {x: x**2 for x in range(5)}  # => {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+
+
+####################################################
+## 5. Modules
+
+# import modules
+import math
+print(math.sqrt(16))  # => 4.0
+
+# specific functions from a module
+from math import ceil, floor
+print(ceil(3.7))   # => 4.0
+print(floor(3.7))  # => 3.0
+
+import math as m
+math.sqrt(16) == m.sqrt(16)  # => True
+
+# find out which functions and attributes are defined in a module.
+import math
+dir(math)
+
+
+
+
+
