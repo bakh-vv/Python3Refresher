@@ -450,6 +450,65 @@ class Superhero(Human):
     print(sup.age)              # => 31
 
 
+####################################################
+## 6.2 Multiple Inheritance
+
+# Another class definition
+# bat.py
+class Bat:
+
+    species = 'Baty'
+
+    def __init__(self, can_fly=True):
+        self.fly = can_fly
+
+    # This class also has a say method
+    def say(self, msg):
+        msg = '... ... ...'
+        return msg
+
+    # And its own method as well
+    def sonar(self):
+        return '))) ... ((('
+
+if __name__ == '__main__':
+    b = Bat()
+    print(b.say('hello'))
+    print(b.fly)
+
+# superhero.py
+from superhero import Superhero
+from bat import Bat
+
+class Batman(Superhero, Bat):
+    def __init__(self, *args, **kwargs):
+        # So instead we explicitly call __init__ for all ancestors.
+        # The use of *args and **kwargs allows for a clean way to pass arguments,
+        # with each parent "peeling a layer of the onion".
+        Superhero.__init__(self, 'anonymous', movie=True, 
+                           superpowers=['Wealthy'], *args, **kwargs)
+        Bat.__init__(self, *args, can_fly=False, **kwargs)
+
+        # override the value for the name attribute
+        self.name = 'Sad Affleck'
+
+    def sing(self):
+        return 'nan nan nan nan nan batman!'
+
+if __name__ == '__main__':
+    sup = Batman()
+
+    # Calls method from Human, because inheritance order matters
+    sup.say('I agree')          # => Sad Affleck: I agree
+
+    # Inherited attribute from 2nd ancestor whose default value was overridden.
+    print('Can I fly? ' + str(sup.fly)) # => Can I fly? False
+
+
+
+
+
+
 
 
 
