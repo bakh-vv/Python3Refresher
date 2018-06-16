@@ -390,6 +390,66 @@ print(i.grunt())                # => TypeError: grunt() takes 0 positional argum
 i.say(i.age)                    # => "Ian: 42"
 
 
+####################################################
+## 6.1 Inheritance
+
+# To import functions from other files use the following format
+# from "filename-without-extension" import "function-or-class"
+from human import Human
+
+class Superhero(Human):
+
+    # If the child class should inherit all of the parent's definitions without any modifications
+    # pass #(commented out to allow for a unique child class)
+
+    # Child classes can override their parents' attributes
+    species = 'Superhuman'
+
+    # Children automatically inherit their parent class's constructor including
+    # its arguments, but can also define additional arguments or definitions
+    # and override its methods such as the class constructor.
+
+    # This constructor inherits the "name" argument from the "Human" class and
+    # adds the "superpower" and "movie" arguments:
+    def __init__(self, name, movie=False,
+                 superpowers=["super strength", "bulletproofing"]):
+
+        # add additional class attributes:
+        self.fictional = True
+        self.movie = movie
+        self.superpowers = superpowers
+
+        # The "super" function lets you access the parent class's methods
+        # that are overridden by the child, in this case, the __init__ method.
+        # This calls the parent class constructor:
+        super().__init__(name)
+
+    # override the sing method
+    def sing(self):
+        return 'Dun, dun, DUN!'
+
+    # add an additional instance method
+    def boast(self):
+        for power in self.superpowers:
+            print("I wield the power of {pow}!".format(pow=power))
+
+    # Instance type checks
+    if isinstance(sup, Human):
+        print('I am human')
+    if type(sup) is Superhero:
+        print('I am a superhero')
+
+    # Calls parent method but uses its own class attribute
+    print(sup.get_species())    # => Superhuman
+
+    # Calls overridden method
+    print(sup.sing())           # => Dun, dun, DUN!
+    
+    # Inherited class attribute
+    sup.age = 31
+    print(sup.age)              # => 31
+
+
 
 
 
